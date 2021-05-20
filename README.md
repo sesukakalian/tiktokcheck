@@ -1,2 +1,2 @@
-# tiktokcheck
-Tiktok username check
+# tiktok username check
+Check username tiktok di pakai atau belum
