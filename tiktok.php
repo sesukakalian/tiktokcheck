@@ -1,0 +1,34 @@
+<?php
+ 
+function generateRandomString($length) {
+    return substr(str_shuffle(str_repeat($x='abcdefghijklmnopqrstuvwxyz', ceil($length/strlen($x)) )),1,$length);
+}
+ 
+echo "Tiktok check username available\n";
+echo "Author @Bagas Setiawan\n";
+echo "Don't forget to Follow My Instagram @sesukakalian\n";
+echo "\n";
+ 
+$huruf = readline("Jumlah Huruf ? : ");
+$jumlah = readline("Amount ? : ");
+for ($i=0; $i < $jumlah ; $i++) {
+ 
+    $acak = generateRandomString($huruf);
+ 
+    $url = "https://www.tiktok.com/$acak/";
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_HEADER, true);    // we want headers
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
+    curl_setopt($ch, CURLOPT_TIMEOUT,10);
+    $output = curl_exec($ch);
+    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+ 
+    if ($httpcode == 404) {
+        echo "\033[32m Username Tersedia => ".$acak."\n";
+    } else {
+        echo "\033[31m Username Tidak Tersedia => ".$acak."\n";
+    }
+}
+ 
+?>
